@@ -226,5 +226,4 @@ C.wireActions(actions);
 C.startScene(document.querySelector("canvas.scene"), peaceScene(), { groundAt: document.querySelector("header.top") });
 C.wireHelp();
 C.fill("year", YEAR);
-$("retry").addEventListener("click", () => { C.setState("loading"); show(); });
 show();
