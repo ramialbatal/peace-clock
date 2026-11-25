@@ -13,6 +13,15 @@ const rgba = (c, a = 1) => `rgba(${c.join(",")},${a})`;
 const SKY = /** @type {RGB[]} */ ([[7, 9, 18], [24, 28, 50], [120, 78, 74]]);
 const CITY = /** @type {RGB} */ ([11, 12, 19]), FAR = /** @type {RGB} */ ([28, 31, 50]);
 
+// The dove (the same drawing as the homepage card), in a 50 by 32 box facing right
+const DOVE = {
+  far: new Path2D("M19 17 C20 9 25 3.5 31 1 C30.5 6.5 28 12 24.5 17 Z"),
+  body: new Path2D("M1.5 21.5 C7 18.5 13 17 20 17.2 C25.5 17.4 29 16 31.6 13.4 C33.2 11.8 35.6 11.8 36.6 13.4 L40.2 14.6 L36.4 15.8 C34.6 20.2 29.4 23.4 22 24.2 C15 25 9 24 4.6 22.8 L0 25.6 Z"),
+  near: new Path2D("M12.6 20.6 C11.8 11 7.5 5.2 1.8 1.6 C9.6 2 16.6 6.4 20.4 12.4 C21.8 14.6 22.6 17.4 22.8 20.6 Z"),
+  twig: new Path2D("M39.6 15 C42 16 44 17.6 45.6 19.6"),
+  leaves: new Path2D("M40.6 16.4 a1.8 .75 -25 1 0 3.2 -1.6 a1.8 .75 -25 1 0 -3.2 1.6 Z M42.9 19 a1.8 .75 35 1 0 3 1.6 a1.8 .75 35 1 0 -3 -1.6 Z M41.2 17.2 a1.6 .7 60 1 0 1.4 2.8 a1.6 .7 60 1 0 -1.4 -2.8 Z"),
+};
+
 /** A soft round sprite for smoke and glows. */
 function softDot() {
   const c = document.createElement("canvas");
@@ -140,18 +149,21 @@ export function peaceScene() {
         ctx.fillStyle = g; ctx.fillRect(fi.x - 22, fi.top - 14, 44, 44);
       }
 
-      // Now and then, a white dove flies across: a sign of hope
+      // Now and then, a white dove with an olive twig flies across: a sign of hope
       const cycle = 26, k = ((t + 8) % cycle) / 11;
       if (k < 1) {
-        const x = -40 + k * (w + 80), y = G * 0.3 + Math.sin(k * Math.PI * 2) * G * 0.05, flap = Math.sin(t * 9) * 7, s = w < 600 ? 1 : 1.3;
-        ctx.fillStyle = "rgba(250,250,255,.95)";
-        ctx.beginPath(); ctx.ellipse(x, y, 9 * s, 3.6 * s, -0.1, 0, Math.PI * 2); ctx.fill();          // body
-        ctx.beginPath(); ctx.arc(x + 8 * s, y - 2 * s, 2.8 * s, 0, Math.PI * 2); ctx.fill();            // head
-        ctx.beginPath(); ctx.moveTo(x - 2 * s, y - 1 * s); ctx.quadraticCurveTo(x - 8 * s, y - (12 + flap) * s, x - 16 * s, y - (6 + flap) * s);
-        ctx.quadraticCurveTo(x - 8 * s, y - 3 * s, x + 3 * s, y); ctx.fill();                            // wing
-        ctx.beginPath(); ctx.moveTo(x - 8 * s, y); ctx.lineTo(x - 15 * s, y - 3 * s); ctx.lineTo(x - 15 * s, y + 3 * s); ctx.fill();   // tail
-        ctx.strokeStyle = "rgba(120,170,90,.95)"; ctx.lineWidth = 1.4;                                   // olive twig
-        ctx.beginPath(); ctx.moveTo(x + 10 * s, y - 1 * s); ctx.lineTo(x + 16 * s, y + 2 * s); ctx.stroke();
+        const s = w < 600 ? 0.9 : 1.2, x = -60 + k * (w + 120), y = G * 0.52 + Math.sin(k * Math.PI * 2) * G * 0.04;   // below the header text, above the rooftops
+        const flap = 0.7 + 0.3 * Math.cos(t * 6);   // wings beat between fully raised (1) and half raised
+        ctx.save(); ctx.translate(x, y); ctx.scale(s, s); ctx.translate(-22, -16);
+        // The far wing, then the body, then the near wing; both wings fold towards the body as they flap
+        ctx.save(); ctx.translate(0, 17); ctx.scale(1, flap); ctx.translate(0, -17);
+        ctx.fillStyle = "rgba(201,207,221,.95)"; ctx.fill(DOVE.far); ctx.restore();
+        ctx.fillStyle = "rgba(247,248,252,.97)"; ctx.fill(DOVE.body);
+        ctx.save(); ctx.translate(0, 20); ctx.scale(1, flap); ctx.translate(0, -20); ctx.fill(DOVE.near); ctx.restore();
+        ctx.fillStyle = "#1b2040"; ctx.beginPath(); ctx.arc(34.6, 13.6, 0.75, 0, Math.PI * 2); ctx.fill();
+        ctx.strokeStyle = "#86c07a"; ctx.lineWidth = 1; ctx.lineCap = "round"; ctx.stroke(DOVE.twig);
+        ctx.fillStyle = "#86c07a"; ctx.fill(DOVE.leaves);
+        ctx.restore();
       }
 
       // Dark ground below the horizon, fading into the page
