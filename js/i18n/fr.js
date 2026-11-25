@@ -51,7 +51,7 @@ export default {
   "help.analogy": "💡 Si les dépenses militaires mondiales étaient <b>100 pièces</b>, tout l’appel humanitaire de l’ONU en représenterait environ <b id=\"analogy-coins\"></b>.",
   "help.done": "Compris",
   "f.about": "<strong>L’Horloge de la paix</strong> estime ce que le monde et les plus grands pays ont dépensé pour leur armée depuis le début de l’année, mis à jour chaque seconde à partir de données annuelles officielles, à côté des vies perdues à la guerre.",
-  "f.related": "Voir aussi l’<a href=\"https://ramialbatal.github.io/emissions-clock/\">Horloge des émissions</a>, l’<a href=\"https://ramialbatal.github.io/renewables-clock/\">Horloge des renouvelables</a> et l’<a href=\"https://ramialbatal.github.io/jobs-clock/\">Horloge de l’emploi</a> · une partie de <a href=\"https://ramialbatal.github.io/\">AI for things that matter</a>",
+  "f.related": "Voir aussi l’<a href=\"https://ramialbatal.github.io/emissions-clock/\">Horloge des émissions</a>, l’<a href=\"https://ramialbatal.github.io/renewables-clock/\">Horloge des renouvelables</a>, l’<a href=\"https://ramialbatal.github.io/jobs-clock/\">Horloge de l’emploi</a> et l’<a href=\"https://ramialbatal.github.io/warming-clock/\">Horloge du réchauffement</a> · une partie de <a href=\"https://ramialbatal.github.io/\">AI for things that matter</a>",
   "f.links": "Estimations uniquement · données actualisées à chaque visite · <a href=\"https://github.com/ramialbatal/peace-clock\" rel=\"noopener\">Code source</a>",
   "msg.head.up.t": "Le monde dépense de plus en plus pour les armées et les armes",
   "msg.head.up.x": "Les dépenses militaires ont augmenté de {pct} sur la dernière année.",
