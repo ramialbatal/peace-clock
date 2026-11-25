@@ -51,7 +51,7 @@ export default {
   "help.analogy": "💡 Si el gasto militar del mundo fueran <b>100 monedas</b>, todo el llamamiento humanitario de la ONU sería de unas <b id=\"analogy-coins\"></b>.",
   "help.done": "Entendido",
   "f.about": "El <strong>Reloj de la paz</strong> estima lo que el mundo y los países que más gastan han destinado a lo militar en lo que va de año, actualizado cada segundo a partir de datos anuales oficiales, junto a las vidas perdidas en la guerra.",
-  "f.related": "Mira también el <a href=\"https://ramialbatal.github.io/emissions-clock/\">Reloj de emisiones</a>, el <a href=\"https://ramialbatal.github.io/renewables-clock/\">Reloj de renovables</a> y el <a href=\"https://ramialbatal.github.io/jobs-clock/\">Reloj del empleo</a> · forma parte de <a href=\"https://ramialbatal.github.io/\">AI for things that matter</a>",
+  "f.related": "Mira también el <a href=\"https://ramialbatal.github.io/emissions-clock/\">Reloj de emisiones</a>, el <a href=\"https://ramialbatal.github.io/renewables-clock/\">Reloj de renovables</a>, el <a href=\"https://ramialbatal.github.io/jobs-clock/\">Reloj del empleo</a> y el <a href=\"https://ramialbatal.github.io/warming-clock/\">Reloj del calentamiento</a> · forma parte de <a href=\"https://ramialbatal.github.io/\">AI for things that matter</a>",
   "f.links": "Son estimaciones · los datos se actualizan en cada visita · <a href=\"https://github.com/ramialbatal/peace-clock\" rel=\"noopener\">Código fuente</a>",
   "msg.head.up.t": "El mundo gasta cada vez más en ejércitos y armas",
   "msg.head.up.x": "El gasto militar subió un {pct} en el último año.",

@@ -50,7 +50,7 @@ export default {
   "help.analogy": "💡 لو كان الإنفاق العسكري في العالم <b>100 قطعة نقدية</b>، لكان النداء الإنساني للأمم المتحدة كله نحو <b id=\"analogy-coins\"></b> منها فقط.",
   "help.done": "فهمت",
   "f.about": "<strong>ساعة السلام</strong> تقدّر ما أنفقه العالم وأكبر الدول على الجيوش منذ بداية العام، وتُحدَّث كل ثانية بناءً على البيانات السنوية الرسمية، إلى جانب الأرواح التي تحصدها الحروب.",
-  "f.related": "اطّلع أيضًا على <a href=\"https://ramialbatal.github.io/emissions-clock/\">ساعة الانبعاثات</a> و<a href=\"https://ramialbatal.github.io/renewables-clock/\">ساعة الطاقة المتجددة</a> و<a href=\"https://ramialbatal.github.io/jobs-clock/\">ساعة الوظائف</a> · جزء من مشروع <a href=\"https://ramialbatal.github.io/\">AI for things that matter</a>",
+  "f.related": "اطّلع أيضًا على <a href=\"https://ramialbatal.github.io/emissions-clock/\">ساعة الانبعاثات</a> و<a href=\"https://ramialbatal.github.io/renewables-clock/\">ساعة الطاقة المتجددة</a> و<a href=\"https://ramialbatal.github.io/jobs-clock/\">ساعة الوظائف</a> و<a href=\"https://ramialbatal.github.io/warming-clock/\">ساعة الاحترار</a> · جزء من مشروع <a href=\"https://ramialbatal.github.io/\">AI for things that matter</a>",
   "f.links": "تقديرات فقط · تُجلب البيانات من جديد في كل زيارة · <a href=\"https://github.com/ramialbatal/peace-clock\" rel=\"noopener\">الشيفرة المصدرية</a>",
   "msg.head.up.t": "العالم ينفق أكثر فأكثر على الجيوش والأسلحة",
   "msg.head.up.x": "ارتفع الإنفاق العسكري بنسبة {pct} في العام الأخير.",
