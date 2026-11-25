@@ -1,0 +1,26 @@
+# Notes for AI assistants working in this repository
+
+- This is the Peace Clock, one of four open clocks (Emissions, Renewables, Jobs, Peace) built on
+  [clock-core](https://github.com/ramialbatal/clock-core). Read `CONTRIBUTING.md`, then the developer notes in
+  clock-core's `docs/` (especially `lessons-learned.md` and `adding-a-clock.md`) before changing anything.
+- Plain ES modules, no build step. Settings in `js/config.js`, pure calculations in `js/model.js` (add a test in
+  `test/model.test.js` for every change), plain-language messages in `js/messages.js` (tested in
+  `test/messages.test.js`), page code in `js/app.js`, the animated picture behind the header in `js/scene.js` (keep the
+  title readable over it; check screenshots at laptop and phone width).
+- Page design: answer first, in plain words with a colour (green, amber, red); one short sentence per point; every
+  number, method or source behind "More" or "How we calculate this". No jargon in what a visitor sees first.
+- This clock is about war: keep the tone factual and respectful. Lives lost are shown in a quiet colour, never
+  dramatised, and the counter is an estimate at last year's pace (say so wherever it appears).
+- Never copy clock-core helpers into this repo; change clock-core, release it, then bump the pin in three places:
+  the two clock-core URLs in `index.html` and the `clock-core` dev dependency in `package.json`.
+- Colour and verdict logic must compare values as displayed (`C.shown` / `C.shownSign`), never raw numbers.
+- Escape any data text put into HTML with `escapeHtml`; update live numbers only with `setText` inside the ticker.
+- Languages: English, French, Spanish, Arabic (right to left). Visible text in `index.html` carries `data-i18n` keys;
+  words used by the code live in `js/i18n/en.js` and are read with `C.t()`. Any new or changed text needs all four
+  languages (`test/i18n.test.js` fails otherwise). See clock-core's `docs/how-it-works.md`, "Languages".
+- Writing style: no em dashes or en dashes anywhere (text, comments, images). Professional but approachable.
+- Before finishing: `npm run check` and `npm run smoke` (use `CLOCK_CORE_DIR=../clock-core` to test against a local
+  clock-core checkout).
+- Every December, update the UN humanitarian appeal in `js/config.js` (`appeal.usd`, `appeal.year`, `appeal.source`,
+  `appeal.sourceUrl` and the comment above them) from the new Global Humanitarian Overview, quoting the source in the
+  pull request.

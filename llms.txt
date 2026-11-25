@@ -1,0 +1,25 @@
+# Peace Clock
+
+> A live, browser-based clock of the world's military spending so far this year, for the world and the biggest
+> spenders, next to the lives lost to war and what the same money could pay for. URL: https://ramialbatal.github.io/peace-clock/
+
+## What it shows
+- World military spending so far this year, ticking every second (constant 2024 US dollars), and an estimate of lives lost in armed conflicts so far this year at last year's pace.
+- A plain-language answer: is the world spending more or less on armies and weapons?
+- Where we stand: how many days of military spending equal the UN's yearly humanitarian appeal; more or fewer lives lost than the year before; how many of the biggest spenders raised their budgets.
+- Biggest spenders: United States, China, Russia, Germany, India, United Kingdom, Saudi Arabia, Ukraine, France, Japan, South Korea, Israel, Poland, Italy, Australia, Türkiye, Canada, Brazil, plus rest of world. For each: spending so far this year, share of the world total, share of its economy, trend and history since 2015.
+- Where war takes the most lives: the places with the most deaths in the latest complete year, with their trend.
+- "What can I do?": three sourced actions.
+- Languages: English, French (?lang=fr), Spanish (?lang=es) and Arabic (?lang=ar).
+- An embeddable widget for other websites: https://ramialbatal.github.io/peace-clock/?embed=1 (add &lang=fr, es or ar).
+
+## Data sources (fetched live from Our World in Data)
+- Military spending: SIPRI Military Expenditure Database, constant 2024 US dollars. https://www.sipri.org/databases/milex
+- Deaths in armed conflicts: Uppsala Conflict Data Program (UCDP), best estimate, all conflict types, by country where the fighting happened. https://ucdp.uu.se/
+- UN humanitarian appeal: OCHA, Global Humanitarian Overview 2026 ($33 billion).
+
+## Method
+Spending: the latest official yearly value projected to the current year with the latest year-on-year change, spread evenly across the year (UTC). Lives lost: the latest complete year's total at the same pace. The live counters are a model, not a real-time measurement.
+
+## Source code
+https://github.com/ramialbatal/peace-clock

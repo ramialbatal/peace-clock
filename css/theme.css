@@ -1,0 +1,50 @@
+/* Peace Clock: colours and page-specific styles (loaded after clock-core.css) */
+:root { --accent: #ff6b81; --accent-2: #ffc0cb; --tint: #2a121a; --glow: rgba(255,107,129,.32); --on-accent: #1a0709; --lives: #e6e9f2; }
+
+/* Two counters side by side: money (accent) and lives (quiet white, out of respect) */
+.duo { display: grid; gap: 14px; grid-template-columns: 1fr 1fr; margin: 0 0 12px; }
+.duo .hero { margin: 0; }
+/* Side by side, each counter gets half the width: 13-digit dollar amounts must still fit on one line */
+@media (min-width: 761px) { .duo .big { font-size: clamp(1.6rem, 3.3vw, 3rem); } }
+.hero.lives .big { color: var(--lives); text-shadow: 0 0 22px rgba(230,233,242,.18); }
+@media (max-width: 760px) { .duo { grid-template-columns: 1fr; } }
+.hero-more { text-align: center; margin: 0 0 40px; }
+.hero-more p { color: var(--muted); font-size: .92rem; max-width: 720px; margin: 10px auto 0; }
+.hero-more b { color: var(--text); font-family: var(--mono); }
+.hero-more .progress { max-width: 640px; }
+
+/* Where war takes the most lives: a short ranked list with bars */
+.places { margin: 48px 0 0; }
+.places h2 { margin: 0 0 6px; }
+.place-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.place {
+  display: grid; grid-template-columns: auto 1fr auto; grid-template-areas: "flag name badge" "bar bar num";
+  align-items: center; gap: 6px 10px; padding: 12px 14px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+}
+.place .flag { grid-area: flag; font-size: 1.4rem; }
+.place-name { grid-area: name; font-weight: 600; }
+.place .badge { grid-area: badge; margin: 0; }
+.place-bar { grid-area: bar; height: 8px; background: var(--line); border-radius: 4px; overflow: hidden; }
+.place-bar i { display: block; height: 100%; background: var(--lives); opacity: .75; border-radius: 4px; }
+.place-num { grid-area: num; color: var(--muted); font-size: .88rem; white-space: nowrap; }
+
+/* Military spending next to the UN's aid appeal, in the explainer */
+.cmp-row { grid-template-columns: 80px 1fr 120px; }
+.cmp-row.mil i { background: var(--accent); }
+.cmp-row.aid i { background: #7fd1a0; }
+
+/* The widget (?embed=1): clock-core shows only the answer and .hero inside main. Here the counters sit in .duo, so
+   show it, with the money counter only (the lives counter and the details stay on the full page). */
+html[data-embed] main > .duo:not(.answer):not(.hero) { display: block !important; margin: 0; }
+html[data-embed] .hero.lives { display: none; }
+/* The answer here is long ("...armies and weapons"): a slightly smaller widget so it fits a 300px frame */
+html[data-embed] .answer-title { font-size: 1rem; }
+html[data-embed] .answer-icon { font-size: 1.1rem; }
+html[data-embed] .hero { padding: 8px 10px; }
+html[data-embed] .hero .unit { font-size: .76rem; }
+html[data-embed] .big { font-size: clamp(1.2rem, 7vw, 2.4rem); }
+/* Share picture (?card=1): room for the two-line answer and the address */
+html[data-card] .answer-title { font-size: 1.15rem; }
+html[data-card] .big { font-size: 2.5rem; }
+html[data-card] .hero { padding: 8px 14px; }
+html[data-card] .embed-credit { margin-top: 6px; }

@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="meta.title">Peace Clock: Live World Military Spending and Lives Lost to War</title>
+  <meta name="description" data-i18n-attr="content:meta.description" content="Watch the world's military spending rise second by second, next to the lives lost in armed conflicts. A live clock for the world and the biggest spenders, based on SIPRI and Uppsala Conflict Data Program figures.">
+  <meta name="keywords" content="military spending, military expenditure, world military spending, defence budgets, war deaths, armed conflict deaths, peace, SIPRI, UCDP, humanitarian aid">
+  <!-- Languages: English at the plain address, the others with ?lang=. The script below picks the language before
+       the first paint (?lang=, then the visitor's last choice, then the browser), sets <html lang dir>, points the
+       canonical address at that language, and hides the page until the translation is in (clock-core translatePage). -->
+  <link rel="canonical" href="https://ramialbatal.github.io/peace-clock/">
+  <link rel="alternate" hreflang="en" href="https://ramialbatal.github.io/peace-clock/">
+  <link rel="alternate" hreflang="fr" href="https://ramialbatal.github.io/peace-clock/?lang=fr">
+  <link rel="alternate" hreflang="es" href="https://ramialbatal.github.io/peace-clock/?lang=es">
+  <link rel="alternate" hreflang="ar" href="https://ramialbatal.github.io/peace-clock/?lang=ar">
+  <link rel="alternate" hreflang="x-default" href="https://ramialbatal.github.io/peace-clock/">
+  <script>
+    (function () {
+      var ok = ["en", "fr", "es", "ar"], q = new URLSearchParams(location.search), saved = null, h = document.documentElement;
+      try { saved = localStorage.getItem("clock-lang"); } catch (e) {}
+      var browser = (navigator.languages || [navigator.language || ""]).map(function (x) { return String(x).slice(0, 2).toLowerCase(); });
+      var l = [q.get("lang"), saved].concat(browser).filter(function (x) { return ok.indexOf(x) >= 0; })[0] || "en";
+      h.lang = l; h.dir = l === "ar" ? "rtl" : "ltr";
+      if (q.has("embed")) h.setAttribute("data-embed", "");
+      if (q.has("card")) h.setAttribute("data-card", "");   // the weekly link-preview picture (scripts/og-image.js)
+      if (l !== "en") {
+        h.setAttribute("data-i18n", "pending");
+        setTimeout(function () { h.removeAttribute("data-i18n"); }, 4000);   // never stay hidden
+        document.querySelector('link[rel="canonical"]').href = location.origin + location.pathname + "?lang=" + l;
+      }
+    })();
+  </script>
+  <!-- Visit counts: GoatCounter, no cookies, no personal data (clock-core startStats) -->
+  <meta name="clock-stats" content="https://ramialbatal.goatcounter.com/count">
+  <meta name="google-site-verification" content="3SuQ6XzVcD3pdgYeLcflAI5zGCyUTZUtEPxxrUPsIs4" />
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0b0d12">
+  <link rel="icon" href="img/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Peace Clock">
+  <meta property="og:title" content="Peace Clock: what the world spends on war, live">
+  <meta property="og:description" content="World military spending, ticking in real time, next to the lives lost to war and what the same money could do.">
+  <meta property="og:url" content="https://ramialbatal.github.io/peace-clock/">
+  <meta property="og:image" content="https://ramialbatal.github.io/peace-clock/img/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Peace Clock showing world military spending so far this year">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Peace Clock: what the world spends on war, live">
+  <meta name="twitter:description" content="World military spending, ticking in real time, next to the lives lost to war and what the same money could do.">
+  <meta name="twitter:image" content="https://ramialbatal.github.io/peace-clock/img/og-image.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Peace Clock",
+    "alternateName": "Live World Military Spending Clock",
+    "url": "https://ramialbatal.github.io/peace-clock/",
+    "description": "A real-time clock estimating the world's military spending so far this year, for the world and the biggest spenders, next to the number of people killed in armed conflicts and what the same money could pay for.",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "Any (web browser)",
+    "isAccessibleForFree": true,
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "inLanguage": ["en", "fr", "es", "ar"],
+    "keywords": "military spending, war deaths, armed conflict, peace, humanitarian aid",
+    "about": [
+      { "@type": "Thing", "name": "Military expenditure" },
+      { "@type": "Thing", "name": "Armed conflict" },
+      { "@type": "Thing", "name": "Peace" }
+    ],
+    "isBasedOn": [
+      { "@type": "Dataset", "name": "SIPRI Military Expenditure Database", "description": "Annual military spending of every country, in constant US dollars, by the Stockholm International Peace Research Institute.", "creator": { "@type": "Organization", "name": "Stockholm International Peace Research Institute (SIPRI)" }, "url": "https://www.sipri.org/databases/milex", "isAccessibleForFree": true },
+      { "@type": "Dataset", "name": "UCDP battle-related and conflict deaths", "description": "Deaths of soldiers and civilians in armed conflicts, by the country where the fighting happened, from the Uppsala Conflict Data Program.", "creator": { "@type": "Organization", "name": "Uppsala Conflict Data Program" }, "url": "https://ucdp.uu.se/", "isAccessibleForFree": true }
+    ]
+  }
+  </script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ramialbatal/clock-core@84e352e5510444ec758efc82d2b522de74582b3d/clock-core.css">
+  <link rel="stylesheet" href="css/theme.css">
+  <!-- clock-core is pinned to an exact commit; to upgrade, change it here, in the CSS link above and in package.json -->
+  <script type="importmap">{ "imports": { "clock-core": "https://cdn.jsdelivr.net/gh/ramialbatal/clock-core@84e352e5510444ec758efc82d2b522de74582b3d/clock-core.js" } }</script>
+  <!-- If the page code can't load (CDN down, very old browser), show the error box instead of a spinner forever -->
+  <script>
+    function clockLoadFailed() {
+      var show = function () {
+        document.body.dataset.state = "error";
+        var m = document.getElementById("error-msg");
+        if (m) m.textContent = "The page code could not load. Please check your connection, update your browser, or try again later.";
+        var r = document.getElementById("retry");
+        if (r) r.onclick = function () { location.reload(); };
+      };
+      document.documentElement.removeAttribute("data-i18n");
+      if (document.body) show(); else document.addEventListener("DOMContentLoaded", show);
+    }
+  </script>
+  <script nomodule>clockLoadFailed();</script>
+  <script type="module" src="js/app.js" onerror="clockLoadFailed()"></script>
+</head>
+<body class="has-scene" data-state="loading">
+  <canvas class="scene" aria-hidden="true"></canvas>
+  <header class="top">
+    <div class="wrap">
+      <h1 data-i18n="h.title">Peace Clock</h1>
+      <p class="sub" data-i18n="h.sub">What the world spends on war, live, and what it costs in lives</p>
+      <div class="gas-bar">
+        <button type="button" class="help-btn" data-open-help aria-haspopup="dialog">
+          <span aria-hidden="true">?</span><span class="sr-only" data-i18n="h.help">What do these numbers count?</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <noscript>
+    <div class="status">
+      <p><strong>This live clock needs JavaScript.</strong></p>
+      <p class="hint">It estimates the world's military spending so far this year, for the world and the biggest
+        spenders (the United States, China, Russia, Germany, India and more), from SIPRI's official annual figures, next
+        to the number of people killed in armed conflicts (Uppsala Conflict Data Program).</p>
+    </div>
+  </noscript>
+
+  <div class="status loading-only" role="status">
+    <div class="spinner" aria-hidden="true"></div>
+    <p data-i18n="st.loading">Getting the latest official data…</p>
+    <p class="hint" data-i18n="st.via">SIPRI and UCDP, via Our World in Data</p>
+  </div>
+
+  <div class="status error-only" role="alert">
+    <p><strong data-i18n="st.error">Couldn't load the data.</strong></p>
+    <p class="hint" id="error-msg"></p>
+    <button id="retry" type="button" data-i18n="st.retry">Try again</button>
+  </div>
+
+  <main class="wrap ready-only">
+    <!-- 1. The answer, in one line -->
+    <section class="answer" id="answer" data-tone="bad" aria-live="polite">
+      <p class="answer-icon" id="answer-icon" aria-hidden="true"></p>
+      <h2 class="answer-title" id="answer-title"></h2>
+      <p class="answer-text" id="answer-text"></p>
+    </section>
+
+    <!-- 2. Two live counters: money and lives -->
+    <div class="duo">
+      <section class="hero" aria-label="World military spending" data-i18n-attr="aria-label:hero.money.aria">
+        <p class="label" data-i18n="hero.money.label">Spent on the military by the world so far in <span data-year></span></p>
+        <div class="big" id="world-num">0</div>
+        <p class="unit" data-i18n="hero.money.unit">US dollars · about <b id="world-rate">0</b> more every second</p>
+        <p class="since" data-i18n="hero.money.since">+<b id="world-since">0</b> dollars since you opened this page</p>
+      </section>
+      <section class="hero lives" aria-label="Lives lost to war" data-i18n-attr="aria-label:hero.lives.aria">
+        <p class="label" data-i18n="hero.lives.label">Lives lost to war so far in <span data-year></span> (estimate)</p>
+        <div class="big" id="lives-num">0</div>
+        <p class="unit" id="lives-every"></p>
+      </section>
+    </div>
+    <details class="more-info hero-more">
+      <summary data-i18n="hero.more">More about these numbers</summary>
+      <div class="progress" aria-hidden="true"><i id="world-bar"></i></div>
+      <p data-i18n="hero.detail1"><b><i id="world-pct">0</i>%</b> of the year has passed. The world is expected to spend about
+        <b id="world-annual"></b> on the military in <span data-year></span>, based on <b id="world-official"></b> officially
+        reported for <span data-latest></span> (<b id="world-growth"></b> on <span data-trend-from></span>). In US dollars at 2024 prices.</p>
+      <p data-i18n="hero.detail2">About <b id="lives-last"></b> people were killed in armed conflicts in <span data-lives-year></span>:
+        soldiers and civilians. This year's counter assumes the same pace. Deaths from hunger and disease caused by war
+        are not counted, so the real toll is higher.</p>
+    </details>
+
+    <!-- 3. Where we stand: three traffic lights -->
+    <section class="standing" aria-labelledby="standing-title">
+      <h2 id="standing-title" data-i18n="st.title">Where we stand</h2>
+      <div class="status-grid" id="status-cards"></div>
+      <details class="more-info">
+        <summary data-i18n="st.more">What do these mean?</summary>
+        <p data-i18n="st.appeal">Every year the United Nations asks for money to help people hit by wars, disasters and hunger: the
+          <b>humanitarian appeal</b>. For <span data-appeal-year></span> it asks for <b id="appeal-usd"></b>. For every 100 dollars
+          the world spends on the military, about <b id="appeal-ratio"></b> would pay for the whole appeal.</p>
+        <p data-i18n="st.rearm">"Spending more" compares each country's latest year with the year before, after inflation.</p>
+        <p class="src" data-i18n="st.src">Appeal: <a data-appeal-source href="https://www.unocha.org/" rel="noopener"></a>.
+          Spending: SIPRI. Lives lost: Uppsala Conflict Data Program.</p>
+      </details>
+    </section>
+
+    <!-- 4. The biggest spenders -->
+    <section aria-labelledby="countries-title">
+      <div class="bar-head">
+        <h2 id="countries-title" data-i18n="c.title">Who spends the most</h2>
+        <label><span data-i18n="c.sort">Sort by</span>
+          <select id="sort">
+            <option value="total" data-i18n="c.sort.total">Most spending</option>
+            <option value="gdp" data-i18n="c.sort.gdp">Biggest share of the economy</option>
+            <option value="growth" data-i18n="c.sort.growth">Fastest rising</option>
+            <option value="name" data-i18n="c.sort.name">Name</option>
+          </select>
+        </label>
+      </div>
+      <p class="legend" data-i18n="c.legend"><span class="badge ok">▼ Spending less</span> good news · <span class="badge bad">▲ Spending more</span> rearming</p>
+      <div class="grid collapsed" id="grid"></div>
+      <p class="show-all-row"><button type="button" class="show-all" id="show-all" hidden>Show all countries</button></p>
+    </section>
+
+    <!-- 5. Where war takes the most lives -->
+    <section class="places" aria-labelledby="places-title">
+      <h2 id="places-title" data-i18n="p.title">Where war takes the most lives</h2>
+      <p class="legend" data-i18n="p.note">People killed in <span data-lives-year></span>, where the fighting happened</p>
+      <ol class="place-list" id="places"></ol>
+    </section>
+
+    <!-- 6. All the detail, for those who want it -->
+    <details class="method">
+      <summary><h2 data-i18n="m.title">How we calculate this</h2></summary>
+      <p data-i18n="m.p1">Governments report military spending <em>per year</em>, not per second. When this page opens it downloads
+        SIPRI's latest yearly figures (currently up to <span data-latest></span>), projects them to <span data-year></span>
+        using each country's latest year-on-year change (capped at 25% a year), and spreads the result evenly over the year.
+        All amounts are in US dollars at 2024 prices, so years can be compared fairly.</p>
+      <pre data-i18n="m.formula">growth   = S[latest] / S[latest - 1] - 1
+annual   = S[latest] × (1 + growth)^(this year - latest)
+so far   = annual × fraction of the year elapsed (UTC)</pre>
+      <p data-i18n="m.p2">Lives lost are the Uppsala Conflict Data Program's best estimate of soldiers and civilians killed in armed
+        conflicts: wars between countries, wars within countries, fighting between armed groups, and deliberate attacks on
+        civilians. The counter for this year assumes the pace of the latest complete year (<span data-lives-year></span>).
+        It is not a live count of today's wars.</p>
+      <p data-i18n="m.p3">Each country's "More" shows its official yearly spending from <span data-first></span> to
+        <span data-latest></span> as a small chart (scaled to its own range) and a table.</p>
+      <p><button type="button" class="link-btn" data-open-help aria-haspopup="dialog" data-i18n="m.help">What do these numbers count? →</button></p>
+      <p class="src" data-i18n="m.src">Data: <a href="https://www.sipri.org/databases/milex" rel="noopener">SIPRI Military Expenditure
+        Database</a> and <a href="https://ucdp.uu.se/" rel="noopener">Uppsala Conflict Data Program</a>, fetched live from
+        <a href="https://ourworldindata.org/military-personnel-spending" rel="noopener">Our World in Data</a> at <span id="fetched-at"></span>.</p>
+    </details>
+  </main>
+
+  <dialog id="help" aria-labelledby="help-title">
+    <header class="sheet-head">
+      <h2 id="help-title" data-i18n="help.title">What these numbers count</h2>
+      <button type="button" class="close" data-close-help aria-label="Close" data-i18n-attr="aria-label:core.close.button">×</button>
+    </header>
+    <div class="sheet">
+      <h3 data-i18n="help.mil.h">Military spending</h3>
+      <p data-i18n="help.mil.p">Everything governments spend on their armed forces: soldiers' pay and pensions, weapons, bases,
+        research, and military aid to other countries. The Stockholm International Peace Research Institute (SIPRI) collects
+        it for almost every country.</p>
+      <h3 data-i18n="help.lives.h">Lives lost to war</h3>
+      <p data-i18n="help.lives.p">People killed in the fighting, soldiers and civilians, counted by the Uppsala Conflict Data Program
+        from news, reports and local sources. Many more die later from hunger, illness and lost homes, so the real cost of war is
+        much higher.</p>
+      <h3 data-i18n="cmp.h">A year of military spending, next to the UN's aid appeal</h3>
+      <div class="compare">
+        <div class="cmp-row mil"><span data-i18n="cmp.mil">Military</span><div class="cmp-bar"><i style="width:100%"></i></div><b id="cmp-mil"></b></div>
+        <div class="cmp-row aid"><span data-i18n="cmp.aid">UN aid</span><div class="cmp-bar"><i id="cmp-aid-bar"></i></div><b id="cmp-aid"></b></div>
+      </div>
+      <p class="analogy" data-i18n="help.analogy">💡 If the world's military spending were <b>100 coins</b>, the UN's whole humanitarian
+        appeal would be about <b id="analogy-coins"></b> of them.</p>
+      <button type="button" class="done" data-close-help data-i18n="help.done">Got it</button>
+    </div>
+  </dialog>
+
+  <footer class="wrap foot">
+    <p data-i18n="f.about"><strong>Peace Clock</strong> estimates what the world and the biggest spenders have spent on the
+      military so far this year, updated every second from official yearly data, next to the lives lost to war.</p>
+    <p data-i18n="f.related">See also the <a href="https://ramialbatal.github.io/emissions-clock/">Emissions Clock</a>,
+      the <a href="https://ramialbatal.github.io/renewables-clock/">Renewables Clock</a> and the
+      <a href="https://ramialbatal.github.io/jobs-clock/">Jobs Clock</a> · part of <a href="https://ramialbatal.github.io/">AI for things that matter</a></p>
+    <p data-i18n="f.links">Estimates only · data is pulled fresh on every visit ·
+      <a href="https://github.com/ramialbatal/peace-clock" rel="noopener">Source code</a></p>
+  </footer>
+
+</body>
+</html>
